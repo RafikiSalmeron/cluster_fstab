@@ -1,5 +1,5 @@
-#Ejercicio Particiones
-##Enunciado:
+# Ejercicio Particiones
+## Enunciado:
 ~~~
 A una máquina virtual de linux añadirle dos discos duros:
 - disco A
@@ -15,7 +15,7 @@ Para particionar un disco nuevo y formatearlos se utiliza fdisk.
 Modificar el fichero fstab, añadiendo todas las particiones. Las del disco A se montarán manualmente. Las del disco B se montarán automáticamente al arrancar.  
 ~~~
 
-###Particionado
+### Particionado
 Lo primero que debemos hacer, es logearnos como superusuario, y posteriormente mostrar los discos que tenemos conectados al disco duro:
 ~~~
 fdisk -l
@@ -83,7 +83,7 @@ root@rafiki:/home/rafiki# mkdir /DiscoBfat
 ~~~
 Una vez creados los directorios necesitaremos modificar el fichero /etc/fstab
 
-###Fichero /etc/fstab
+### Fichero /etc/fstab
 En la primera linea se utiliza el UUID (Identificador Universal Único) del filesystem y en la segunda la ruta del mismo (no el punto de montaje). Si utilizamos el UUID, nuestro método sera mucho mas robusto.
 Para obtener el UUID debemos ejecutar como root el siguiente comando:
 ~~~
