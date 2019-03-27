@@ -39,3 +39,11 @@ root@rafiki:/home/rafiki# mkdir /DiscoBlinux
 root@rafiki:/home/rafiki# mkdir /DiscoBntfs
 root@rafiki:/home/rafiki# mkdir /DiscoBfat
 ~~~
+
+~~~
+root@rafiki:/home/rafiki# blkid /dev/sdb1 >> /etc/fstab
+root@rafiki:/home/rafiki# blkid /dev/sdb2 >> /etc/fstab
+root@rafiki:/home/rafiki# blkid /dev/sdc1 >> /etc/fstab
+root@rafiki:/home/rafiki# blkid /dev/sdc2 >> /etc/fstab
+root@rafiki:/home/rafiki# blkid /dev/sdc3 >> /etc/fstab
+~~~
