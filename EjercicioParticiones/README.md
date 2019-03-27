@@ -22,6 +22,12 @@ fdisk -l
 ~~~
 ![Listado de discos](../img/listadiscos.PNG )
 
+
+Después usremos el comando fdisk, junto a la ruta del disco. Mostraré un ejemplo del primer disco (DiscoA), haciéndole la primera partición (Linux), ya que con las demás es seguir los pasos de igual forma.
+~~~
+fdisk /dev/sdb
+~~~
+
 ~~~
 Welcome to fdisk (util-linux 2.27.1).
 Changes will remain in memory only, until you decide to write them.
@@ -54,6 +60,19 @@ Syncing disks.
 
 Primero indicamos una nueva partición (n), después que es del tipo primaria (p), el número de partición y por último el tamaño para esta partición. (si se quisiera todo el disco en una sola partición, bastaría con presionar enter).Hay que indicar el tipo de sistema de archivos que tendrá la partición, esto con el comando t, seguido del número de partición, y de un número hexadecimal que define el sistema de archivos. Si en vez del número hexadecimal, introducimos "L", nos mostrará el listado de estos números hexadecimales junto a su sistema de archivos correspondiente. Por último pulsamos "w" para guardar los cambios. Si no quisieramos guardar los cambios pulsaríamos "q" En este caso se dividirá el disco en más de una partición asi que repetiriamos lo anterior pero empezando en el siguiente cilindro disponible y sería la partición 2. 
 
+Una vez lo hayamos realizado con todas las particiones, se quedaría algo así:
+![Listado de discos hechos](../img/listadiscoshechos.PNG )
+
+A continuación debemos crear los filesystem de cada partición. Para ello usaremos el comando mkfs:
+~~~
+mkfs -t ext4 /dev/sdb1   (creamos el filesystem de linux, ext4)
+mkfs -t fat /dev/sdb2   (creamos el filesystem de fat, fat)
+
+mkfs -t ext4 /dev/sdc1   (creamos el filesystem de linux, ext4)
+mkfs -t ntfs /dev/sdc2   (creamos el filesystem de ntfs, ntfs)
+mkfs -t fat /dev/sdc3   (creamos el filesystem de fat, fat)
+~~~
+
 Creamos los directorios donde posteriormente, montaremos los discos:
 ~~~
 root@rafiki:/home/rafiki# mkdir /DiscoAlinux
@@ -62,7 +81,11 @@ root@rafiki:/home/rafiki# mkdir /DiscoBlinux
 root@rafiki:/home/rafiki# mkdir /DiscoBntfs
 root@rafiki:/home/rafiki# mkdir /DiscoBfat
 ~~~
+Una vez creados los directorios necesitaremos modificar el fichero /etc/fstab
 
+###Fichero /etc/fstab
+En la primera linea se utiliza el UUID (Identificador Universal Único) del filesystem y en la segunda la ruta del mismo (no el punto de montaje). Si utilizamos el UUID, nuestro método sera mucho mas robusto.
+Para obtener el UUID debemos ejecutar como root el siguiente comando:
 ~~~
 root@rafiki:/home/rafiki# blkid /dev/sdb1 >> /etc/fstab
 root@rafiki:/home/rafiki# blkid /dev/sdb2 >> /etc/fstab
@@ -70,3 +93,24 @@ root@rafiki:/home/rafiki# blkid /dev/sdc1 >> /etc/fstab
 root@rafiki:/home/rafiki# blkid /dev/sdc2 >> /etc/fstab
 root@rafiki:/home/rafiki# blkid /dev/sdc3 >> /etc/fstab
 ~~~
+Este comando nos recoge el UUID de la particion y lo manda al final del fichero /etc/fstab.
+
+Ahora modificamos el fichero fstab, añadiendo al final del UUID el punto de montaje, y los parámetros de la particion que vamos a montar:
+![Fichero /etc/fstab](../img/ficherofstab.PNG )
+
+Una vez modificado el fichero, pasaríamos a montarlos. Podemos hacerlo montandolo manualmente con el siguiente comando:
+~~~
+mount /dev/sdb1
+mount /dev/sdb2
+
+mount /dev/sdc1
+mount /dev/sdc2
+mount /dev/sdc3
+~~~
+
+Como están en el fichero /etc/fstab, podemos montarlos de la siguiente forma más cómodamente:
+~~~
+mount -a
+~~~
+
+Ya lo tendríamos todo funcionando.
