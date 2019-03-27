@@ -62,5 +62,5 @@ Programar un trabajo (H) para ejecutarse cada primer día de mes a las 00:00h.
 ~~~
 
 ### El fichero /etc/crontab deberá quedar así:
-![Fichero /etc/crontab](../img/crontab.PNG )
+![Fichero contrab](../img/crontab.PNG)
 
