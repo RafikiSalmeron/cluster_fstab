@@ -1,3 +1,26 @@
+#Ejercicio Particiones
+##Enunciado:
+~~~
+A una máquina virtual de linux añadirle dos discos duros:
+- disco A
+  - Crear las siguientes particiones:
+    - Linux
+    - Fat
+- disco B
+  - Crear las siguientes particiones:
+    - Linux
+    - NTFS
+    - Fat   
+Para particionar un disco nuevo y formatearlos se utiliza fdisk.  
+Modificar el fichero fstab, añadiendo todas las particiones. Las del disco A se montarán manualmente. Las del disco B se montarán automáticamente al arrancar.  
+~~~
+
+###Particionado
+Lo primero que debemos hacer, es logearnos como superusuario, y posteriormente mostrar los discos que tenemos conectados al disco duro:
+~~~
+fdisk -l
+~~~
+![Listado de discos](../img/listadiscos.PNG )
 
 ~~~
 Welcome to fdisk (util-linux 2.27.1).
