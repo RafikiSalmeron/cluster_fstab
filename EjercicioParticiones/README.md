@@ -31,4 +31,11 @@ Syncing disks.
 
 Primero indicamos una nueva partición (n), después que es del tipo primaria (p), el número de partición y por último el tamaño para esta partición. (si se quisiera todo el disco en una sola partición, bastaría con presionar enter).Hay que indicar el tipo de sistema de archivos que tendrá la partición, esto con el comando t, seguido del número de partición, y de un número hexadecimal que define el sistema de archivos. Si en vez del número hexadecimal, introducimos "L", nos mostrará el listado de estos números hexadecimales junto a su sistema de archivos correspondiente. Por último pulsamos "w" para guardar los cambios. Si no quisieramos guardar los cambios pulsaríamos "q" En este caso se dividirá el disco en más de una partición asi que repetiriamos lo anterior pero empezando en el siguiente cilindro disponible y sería la partición 2. 
 
- mkfs -t
+Creamos los directorios donde posteriormente, montaremos los discos:
+~~~
+root@rafiki:/home/rafiki# mkdir /DiscoAlinux
+root@rafiki:/home/rafiki# mkdir /DiscoAfat
+root@rafiki:/home/rafiki# mkdir /DiscoBlinux
+root@rafiki:/home/rafiki# mkdir /DiscoBntfs
+root@rafiki:/home/rafiki# mkdir /DiscoBfat
+~~~
