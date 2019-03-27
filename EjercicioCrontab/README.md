@@ -3,6 +3,7 @@
 ### Para realizar el ejercicio, deberemos modificar el fichero /etc/crontab
 
 Cada hora en punto ejecutamos la sincronización horaria y mandamos la salida a /dev/null/
+
 ~~~
 0 * * * * root ntpdate -u hora.roa.es > /dev/null/
 ~~~
